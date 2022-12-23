@@ -13,7 +13,7 @@ const createUserService = async (data: IUserRequest): Promise<User> => {
 
     return user;
   } catch (error) {
-    throw new AppError("existing user", 400);
+    throw new AppError("existing user", 409);
   }
 };
 

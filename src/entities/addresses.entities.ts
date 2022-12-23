@@ -6,16 +6,16 @@ class Addresses {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ length: 50 })
   district: string;
 
-  @Column()
+  @Column({ length: 6 })
   number: string;
 
-  @Column()
+  @Column({ length: 50 })
   city: string;
 
-  @Column()
+  @Column({ length: 2 })
   state: string;
 
   @OneToOne(() => Properties, (properties) => properties.adresses)
