@@ -31,7 +31,7 @@ class Properties {
   @Column()
   updatedAt: Date;
 
-  @OneToOne(() => Addresses)
+  @OneToOne(() => Addresses, (properties) => properties.properties)
   @JoinColumn()
   address: Addresses;
 
