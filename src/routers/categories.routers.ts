@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createCategoryController,
+  listAllCategoriesPropertiesController,
   listCategoryController,
 } from "../controllers/categories.controller";
 import ensureIsAdmMiddleware from "../middlewares/ensureIsAdm.middleware";
@@ -19,5 +20,7 @@ categoryRouter.post(
 );
 
 categoryRouter.get("", listCategoryController);
+
+categoryRouter.get("/:id/properties", listAllCategoriesPropertiesController);
 
 export default categoryRouter;

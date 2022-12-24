@@ -25,15 +25,15 @@ class Properties {
   @Column({ type: "integer" })
   size: number;
 
-  @Column({ type: "date" })
+  @Column()
   createdAt: Date;
 
-  @Column({ type: "date" })
+  @Column()
   updatedAt: Date;
 
-  @OneToOne(() => Addresses, (addresses) => addresses.properties)
+  @OneToOne(() => Addresses)
   @JoinColumn()
-  adresses: Addresses;
+  address: Addresses;
 
   @ManyToOne(() => Categories, (categories) => categories.properties)
   category: Categories;
