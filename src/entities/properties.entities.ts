@@ -1,11 +1,13 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Addresses } from "./addresses.entities";
 import { Categories } from "./categories.entites";
@@ -25,10 +27,10 @@ class Properties {
   @Column({ type: "integer" })
   size: number;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @OneToOne(() => Addresses, (properties) => properties.properties)

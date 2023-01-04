@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createPropertieController } from "../controllers/properties.controller";
+import {
+  createPropertieController,
+  listAllPropertiesController,
+} from "../controllers/properties.controller";
 import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
 import ensureIsAdmMiddleware from "../middlewares/ensureIsAdm.middleware";
 import { createPropertiesSchema } from "../schemas/properties.schema";
@@ -16,5 +19,7 @@ propertiesRouter.post(
   validatePropertiesMiddleware,
   createPropertieController
 );
+
+propertiesRouter.get("", listAllPropertiesController);
 
 export default propertiesRouter;

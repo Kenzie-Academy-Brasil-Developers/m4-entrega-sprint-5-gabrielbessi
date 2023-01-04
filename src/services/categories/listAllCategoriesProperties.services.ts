@@ -1,16 +1,22 @@
 import AppDataSource from "../../data-source";
 import { Categories } from "../../entities/categories.entites";
+import { AppError } from "../../errors/AppError";
 
 const listAllCategoriesPropertiesService = async (idCategory: string) => {
   const categoriesRepository = AppDataSource.getRepository(Categories);
 
-  const properties = await categoriesRepository
-    .createQueryBuilder("categories")
-    .leftJoinAndSelect("categories.properties", "properties")
-    .where("categories.id = :id", { id: idCategory })
-    .getMany();
+  const properties = await categoriesRepository.findOne({
+    where: {
+      id: idCategory,
+    },
+    relations: {
+      properties: true,
+    },
+  });
 
-  console.log(properties);
+  if (!properties) {
+    throw new AppError("Id categories invalid", 404);
+  }
 
   return properties;
 };

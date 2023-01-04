@@ -51,7 +51,6 @@ describe("/properties", () => {
       .post("/properties")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
       .send(mockedProperty);
-    console.log("testando:", response.body);
 
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("value");
