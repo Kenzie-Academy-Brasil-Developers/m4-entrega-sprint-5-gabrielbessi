@@ -7,12 +7,9 @@ const createSchedulesService = async (dataSchedule: IScheduleRequest) => {
     Schedules_users_properties
   );
 
-  console.log("Info chegando: ", dataSchedule);
   const schedules = schedulesRepository.create(dataSchedule);
 
   await schedulesRepository.save(schedules);
-
-  console.log("Cadastrado: ", schedules);
 
   return { message: "Schedule created successfully" };
 };

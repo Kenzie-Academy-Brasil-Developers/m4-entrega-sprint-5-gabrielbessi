@@ -1,6 +1,10 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
-import { IScheduleRequest } from "../interfaces/schedules/index";
+import {
+  IScheduleArray,
+  IScheduleRequest,
+  IScheduleResponse,
+} from "../interfaces/schedules/index";
 
 const schedulesSchema: SchemaOf<IScheduleRequest> = yup.object().shape({
   date: yup.string().required(),
@@ -9,4 +13,26 @@ const schedulesSchema: SchemaOf<IScheduleRequest> = yup.object().shape({
   propertyId: yup.string().required(),
 });
 
-export { schedulesSchema };
+const responseScheduleSchema: SchemaOf<IScheduleResponse> = yup.object().shape({
+  id: yup.string().notRequired(),
+  sold: yup.boolean().notRequired(),
+  size: yup.number().notRequired(),
+  value: yup.number().notRequired(),
+  createdAt: yup.date().notRequired(),
+  updatedAt: yup.date().notRequired(),
+  schedules: yup.object().shape({
+    id: yup.string().notRequired(),
+    date: yup.string().notRequired(),
+    hour: yup.string().notRequired(),
+    user: yup.string().notRequired(),
+  }),
+});
+
+const responseSchedule: SchemaOf<IScheduleArray> = yup.object().shape({
+  id: yup.string().notRequired(),
+  date: yup.string().notRequired(),
+  hour: yup.string().notRequired(),
+  user: yup.string().notRequired(),
+});
+
+export { schedulesSchema, responseScheduleSchema, responseSchedule };

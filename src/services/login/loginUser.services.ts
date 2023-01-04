@@ -20,6 +20,10 @@ const loginUserService = async ({
     throw new AppError("User or password invalid", 403);
   }
 
+  if (user.isActive === false) {
+    throw new AppError("User not Active", 400);
+  }
+
   const passwordVerify = await compare(password, user.password);
 
   if (!passwordVerify) {

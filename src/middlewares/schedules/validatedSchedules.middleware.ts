@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import AppDataSource from "../../data-source";
 import { Properties } from "../../entities/properties.entities";
 import { AppError } from "../../errors/AppError";
@@ -21,16 +21,19 @@ const validatedSchedulesMiddleware = async (
     throw new AppError("This property exists", 404);
   }
 
-  if (dataSchedule.hour > "18:00" || dataSchedule.hour < "8:00") {
+  const hour = new Date(
+    dataSchedule.date + ", " + dataSchedule.hour
+  ).getHours();
+
+  if (hour < 8 || hour >= 18) {
     throw new AppError("Scheduling outside business hours", 400);
   }
 
-  //   const day = new Date(dataSchedule.date);
-  //   const dayWeek = day.getDay();
+  const date = new Date(dataSchedule.date + ", " + dataSchedule.hour).getDay();
 
-  //   if (dayWeek === 0 || dayWeek === 6) {
-  //     throw new AppError("Opening days from Monday to Friday", 400);
-  //   }
+  if (date === 0 || date === 6) {
+    throw new AppError("Day off", 400);
+  }
 
   return next();
 };
